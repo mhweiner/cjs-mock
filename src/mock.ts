@@ -91,7 +91,7 @@ export function mock(modulePath: string, mocks: any) {
 
     if (!absolutePath) {
 
-        throw new Error(`Unable to find module "${modulePath}".`);
+        throw new Error(`Unable to find module ${modulePath}`);
 
     }
 
