@@ -6,9 +6,9 @@ const registeredMocks = new Map<string, {modulePath: string, mockReturnValue: an
 
 function debug(msg: any) {
 
-    if (!process.env.ISOLATE_DEBUG) return;
+    if (!process.env.CJS_MOCK_DEBUG) return;
 
-    console.log('MOCK-DEBUG: ', msg);
+    console.log('CJS_MOCK_DEBUG: ', msg);
 
 }
 
@@ -91,7 +91,7 @@ export function mock(modulePath: string, mocks: any) {
 
     if (!absolutePath) {
 
-        throw new Error(`Unable to find module ${modulePath}`);
+        throw new Error(`Unable to find ${modulePath}`);
 
     }
 
@@ -104,7 +104,7 @@ export function mock(modulePath: string, mocks: any) {
     // make sure there are no unused mocks
     if (registeredMocks.size) {
 
-        throw new Error(`The following imports were not found in module ${modulePath}: 
+        throw new Error(`The following imports were not found in ${modulePath}: 
         ${[...registeredMocks.values()].map((mock) => mock.modulePath).join(', ')}`);
 
     }

@@ -70,10 +70,10 @@ You should pass as a string the same thing you would pass to an `import` stateme
 
 This function throws if any of the modules or properties are not resolvable, or if there are any unused (not required/imported by the module specified in `modulePath`):
 ```
-Error: Unable to find module foo
+Error: Unable to find foo
 ```
 ```
-Error: The following imports were unused in module ./foo: 
+Error: The following imports were unused in ./foo: 
         ./bar
 ```
 
@@ -115,6 +115,20 @@ Just like for `proxyquire` and other mocking utilities, use of this utility is n
 1. Mocking utilities (including this one) are typically designed for unit testing in a sandbox environment, not production code.
 2. It's easy to get the mock wrong (which is why we throw errors for unused mocks and offer debug utilities). Although frustrating, this is harmless in a test environment, but can be disastrous in production.
 3. It has side effects on the module cache. This can lead to some very unexpected behavior outside of a unit test.
+
+# Debugging
+
+A debugging utility is included, for use when you are having a difficult time seeing the order of how things are getting imported, and if a mock has been substituted after a successful resolution & match.
+
+To enable this mode, set this in your environment: `CJS_MOCK_DEBUG=1`.
+
+Example (trucated) output:
+
+```console
+
+```
+
+Be warned, this will produce a ton of output to `stdout`. It's sometimes shocking just how many modules are required in a node project, including built-in modules.
 
 # Contribution
 
