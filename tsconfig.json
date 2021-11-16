@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "target": "ES2015",
+    "moduleResolution": "node",
+    "module": "CommonJS",
+    "declaration": true,
+    "lib": ["ES2020"],
+    "removeComments": false,
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": false,
+    "sourceMap": true,
+    "pretty": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "noImplicitAny": true,
+    "strict": true,
+    "noImplicitReturns": false,
+    "noImplicitUseStrict": false,
+    "outDir": "dist",
+    "baseUrl": "src",
+    "noEmitHelpers": false,
+    "esModuleInterop": true
+  },
+  "include":[
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "compileOnSave":false
+}
