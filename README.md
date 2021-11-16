@@ -1,49 +1,24 @@
-<img src="docs/hoare-triple.png" title="Hoare triple" alt="Hoare triple" width="200">
+<img src="graphic.png" title="diagram" alt="diagram" width="150">
 
-# hoare
+# cjs-mock
 
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![SemVer](https://img.shields.io/badge/SemVer-2.0.0-blue)]()
 
-A simple and opinionated Javascript/Typescript test runner designed to help you to write simple, readable, and maintainable tests. 
-
-**Out-of-the-box Typescript support 🔒**
-- Written in and designed around Typescript. No special configuration needed, and no plugins to install. Works great with [c8](https://github.com/bcoe/c8) for code coverage.
-- Handles compilation errors gracefully.
-
-**Designed For Speed 🚀**
-- Multi-process parallel test runner. Each spec file is run in its own process and runtime for speed and isolation benefits.
-- Simple means fast.
+'Immutable' NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes. Similar to [proxyquire](), but much simpler and more defensive.
 
 **Easy to Use 😃**
-- [Very simple assertion API](#api). You shouldn't need to learn a new language to read and write tests. Assertions should be simple axiomatic logic and code, not an English-like poem.
-- Built-in [powerful diff visualization tool](#visual-diff-tool).
-- Any stray `stdout`, errors, or unhandled promise rejections are buffered and grouped under the test file in the output. This helps you know where they came from.
-- Clear documentation.
+- Much simpler than [proxyquire](). Straightforward documentation.
+- Debugging utility.
 
 **Defensive 🛡**
-- Uncaught errors and unhandled promise rejections will cause the test to fail.
-- Any files without tests, or tests without assertions, result in a failed test.
-- Strict and deep equality operator by default.
-
-**Opinionated 🎓**
-- No nesting of tests. This has the following benefits:
-  - Pressures programmers to break apart their code into smaller pieces.
-  - Test code becomes much simpler and easier to read and maintain.
-  - Output reporting becomes much simpler and easier to read and understand.
-- No built-in `before()` and `after()`. This leads to messy design patterns and mistakes in test code. Most tests shouldn't require teardowns. Of course, you could still create your own.
-
-**Modern Language Features ✨**
-  - Async/Await/Promise Support
-  - CJS & ESM support
+- Throws an error if any mocks are unused (not found in the module we are mocking).
+- Module Cache for the module in question is always deleted before and after mocking to minimize side effects and make behavior more predictable. This approximates immutability.
 
 **Robust & Reliable 💪**
-- Small, simple, and modular codebase written in Typescript with minimal dependencies.
-- Largely agnostic of other tools and doesn't try to do too much.
+- Tiny codebase written in Typescript with only 1 dependency.
 
 # Examples
-
-See [demo](demo) or [src](src) directories for more examples.
 
 ## Hello World
 
