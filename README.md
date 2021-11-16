@@ -12,8 +12,8 @@
 - Debugging utility.
 
 **Defensive 🛡**
-- Throws an error if any mocks are unused (not found in the module we are mocking).
-- Module Cache for the module in question is always deleted before and after mocking to minimize side effects and make behavior more predictable. This approximates immutability.
+- Throws an error if any mocks are unused by module we are mocking.
+- Module Cache for the module in question is always deleted before and after mocking to minimize side effects and make behavior more predictable and approximate immutability.
 
 **Robust & Reliable 💪**
 - Tiny codebase written in Typescript with only 1 dependency.
@@ -110,7 +110,7 @@ const m = mock('./foo', {
 
 # Do Not Use in Production Environment
 
-Just like for `proxyquire` and other mocking utilities, it is not recommend you use this utility in production environments, for the following reasons:
+Just like for `proxyquire` and other mocking utilities, use of this utility is not recommended in production environments, for the following reasons:
 
 1. Mocking utilities (including this one) are typically designed for unit testing in a sandbox environment, not production code.
 2. It's easy to get the mock wrong (which is why we throw errors for unused mocks and offer debug utilities). Although frustrating, this is harmless in a test environment, but can be disastrous in production.
