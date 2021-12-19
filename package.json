@@ -14,7 +14,8 @@
   "scripts": {
     "lint": "eslint ./ --ext .js,.ts",
     "build": "rm -rf ./dist && tsc",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "semantic-release": "semantic-release"
   },
   "homepage": "https://github.com/mhweiner/cjs-mock",
   "keywords": [
