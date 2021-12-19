@@ -56,7 +56,7 @@ test('valid word returns true', async (assert) => {
 # Installation
 
  ```console
- npm i cjs-mock -DE
+ npm i cjs-mock -D
  ```
 
 # API
@@ -136,7 +136,7 @@ Be warned, this will produce a ton of output to `stdout`. It's sometimes shockin
 
 For local development, see scripts in `package.json`.
 
-- Issue a PR against `master` and request review. Make sure all tests pass and coverage is good.
+- Issue a PR against `main` and request review. Make sure all tests pass and coverage is good.
 - You can also submit an issue.
 
 # License
