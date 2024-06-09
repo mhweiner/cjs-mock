@@ -1,4 +1,4 @@
-[![Custom Badge](sponsored-by-aeroview.svg)](https://aeroview.io)
+[![Sponsored by Aeroview](sponsored-by-aeroview.svg)](https://aeroview.io)
 
 # <img src="cjs-mock-icon.svg"> cjs-mock
 
