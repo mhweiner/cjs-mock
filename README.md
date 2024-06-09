@@ -1,6 +1,6 @@
-<a href="https://aeroview.io"><img src="logo-sponsored-by-aeroview.png" title="diagram" alt="diagram" style="height: 50px;margin:0 0 20px"></a>
+<a href="https://aeroview.io"><img src="sponsored-by-aeroview.png" alt="Sponsored by Aeroview" style="height: 50px;margin:0 0 20px"></a>
 
-# cjs-mock
+# <img src="icon.png" style="height:45px;vertical-align:middle;margin:0 10px 0;"> cjs-mock
 
 [![build status](https://github.com/mhweiner/cjs-mock/actions/workflows/workflow.yml/badge.svg)](https://github.com/mhweiner/cjs-mock/actions)
 [![semantic-release](https://img.shields.io/badge/semantic--release-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
