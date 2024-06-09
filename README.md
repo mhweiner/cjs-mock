@@ -1,13 +1,11 @@
-<a href="https://aeroview.io"><img src="sponsored-by-aeroview.png" alt="Sponsored by Aeroview" style="height: 50px;margin:0 0 20px"></a>
-
-# <img src="icon.png" style="height:45px;vertical-align:middle;margin:0 10px 0;"> cjs-mock
+# <img src="icon.png"> cjs-mock
 
 [![build status](https://github.com/mhweiner/cjs-mock/actions/workflows/workflow.yml/badge.svg)](https://github.com/mhweiner/cjs-mock/actions)
 [![semantic-release](https://img.shields.io/badge/semantic--release-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![SemVer](https://img.shields.io/badge/SemVer-2.0.0-blue)]()
 
-'Immutable' NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes. Similar to [proxyquire](https://www.npmjs.com/package/proxyquire), but much simpler and more defensive.
+'Immutable' NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes. Similar to [proxyquire](https://www.npmjs.com/package/proxyquire), but much simpler and more defensive. Sponsord by [Aeroview](https://aeroview.io).
 
 **Easy to Use 😃**
 - Much simpler than [proxyquire](https://www.npmjs.com/package/proxyquire). 
