@@ -1,4 +1,4 @@
-<img src="graphic.png" title="diagram" alt="diagram" width="150">
+<a href="https://aeroview.io"><img src="logo-sponsored-by-aeroview.png" title="diagram" alt="diagram" style="height: 50px;margin:0 0 20px"></a>
 
 # cjs-mock
 
@@ -7,18 +7,20 @@
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![SemVer](https://img.shields.io/badge/SemVer-2.0.0-blue)]()
 
-'Immutable' NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes. Similar to [proxyquire](), but much simpler and more defensive.
+'Immutable' NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes. Similar to [proxyquire](https://www.npmjs.com/package/proxyquire), but much simpler and more defensive.
 
 **Easy to Use 😃**
-- Much simpler than [proxyquire](). Straightforward documentation.
+- Much simpler than [proxyquire](https://www.npmjs.com/package/proxyquire). 
+- Straightforward documentation.
 - Debugging utility.
+- Built in Typescript support.
 
 **Defensive 🛡**
 - Throws an error if any mocks are unused by module we are mocking.
 - Module Cache for the module in question is always deleted before and after mocking to minimize side effects and make behavior more predictable and approximate immutability.
 
 **Robust & Reliable 💪**
-- Tiny codebase written in Typescript with only 1 dependency.
+- Tiny codebase written in Typescript with only 1 dependency (which is also tiny and itself has no dependencies).
 
 # Example
 
@@ -53,6 +55,8 @@ test('valid word returns true', async (assert) => {
 });
 ```
 
+See more examples in the [examples.md](examples.md) file/
+
 # Installation
 
  ```console
@@ -68,7 +72,7 @@ Returns a module with Dependency Injection for `modulePath`, as specified by the
 You should pass as a string the same thing you would pass to an `import` statement or `require`, with the following caveats:
 
 1. Any relative paths be relative to the module being returned
-2. It must only be a direct dependency of that module. It will not work recursively, including re-exported modules.
+2. It must only be a _direct_ dependency of that module. It will not work recursively, including for re-exported modules (ie, `export * from 'foo'`).
 
 This function throws if any of the modules or properties are not resolvable, or if there are any unused (not required/imported by the module specified in `modulePath`):
 ```
@@ -79,24 +83,9 @@ Error: The following imports were unused in ./foo:
         ./bar
 ```
 
-Example usage with relative paths:
+This is a defensive measure to ensure that the mocks are being used as intended.
 
-_/fake/a/foo.js_
-```javascript
-const bar = require('./bar');
-
-module.exports = function() {
-    return 'foo ' + bar();
-}
-```
-_/fake/b/example.js_
-```javascript
-const mockedFoo = mock('../a/foo', { //relative to example.js
-    './bar': () => 'fakeBar', //relative to foo.js
-});
-
-console.log(mockedFoo()) // foo fakeBar
-```
+[See example usage with relative paths](/examples.md#mocking-a-local-module-javascript)
 
 # Partial Mocking
 
@@ -127,7 +116,6 @@ To enable this mode, set this in your environment: `CJS_MOCK_DEBUG=1`.
 Example (trucated) output:
 
 ```console
-
 ```
 
 Be warned, this will produce a ton of output to `stdout`. It's sometimes shocking just how many modules are required in a node project, including built-in modules.
