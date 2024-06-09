@@ -1,4 +1,6 @@
-# <img src="icon.png"> cjs-mock
+<img src="graphic.png" title="diagram" alt="diagram" width="150">
+
+# cjs-mock
 
 [![build status](https://github.com/mhweiner/cjs-mock/actions/workflows/workflow.yml/badge.svg)](https://github.com/mhweiner/cjs-mock/actions)
 [![semantic-release](https://img.shields.io/badge/semantic--release-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
