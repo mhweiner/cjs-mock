@@ -1,4 +1,4 @@
-# <img src="cjs-mock-icon.svg"> cjs-mock
+# <img src="docs/cjs-mock-icon.svg"> cjs-mock
 
 [![build status](https://github.com/mhweiner/cjs-mock/actions/workflows/workflow.yml/badge.svg)](https://github.com/mhweiner/cjs-mock/actions)
 [![semantic-release](https://img.shields.io/badge/semantic--release-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
@@ -53,7 +53,7 @@ test('valid word returns true', async (assert) => {
 });
 ```
 
-See more examples in the [examples.md](examples.md) file/
+See more examples in the [docs/examples.md](examples.md)
 
 # Installation
 
@@ -82,8 +82,6 @@ Error: The following imports were unused in ./foo:
 ```
 
 This is a defensive measure to ensure that the mocks are being used as intended.
-
-[See example usage with relative paths](/examples.md#mocking-a-local-module-javascript)
 
 # Partial Mocking
 
@@ -133,8 +131,8 @@ MIT &copy; Marc H. Weiner
 
 # Sponsored by
 
-[![Sponsored by Aeroview](sponsored-by-aeroview.svg)](https://aeroview.io)
+[![Sponsored by Aeroview](docs/sponsored-by-aeroview.svg)](https://aeroview.io)
 
-We believe that observability tools should be easy-to-use and developer-friendly and built with serverless in mind. See your logs in real time, automatically create incidents, and schedule on-call rotations. 
+We believe that observability tools should be easy-to-use, developer-friendly, and built with serverless in mind. See your logs in real time, automatically create incidents, and schedule on-call rotations.
 
 We are currently in private beta, and we are looking for beta testers. If you are interested, please apply at [aeroview.io](https://aeroview.io).
