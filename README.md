@@ -1,5 +1,3 @@
-[![Sponsored by Aeroview](sponsored-by-aeroview.svg)](https://aeroview.io)
-
 # <img src="cjs-mock-icon.svg"> cjs-mock
 
 [![build status](https://github.com/mhweiner/cjs-mock/actions/workflows/workflow.yml/badge.svg)](https://github.com/mhweiner/cjs-mock/actions)
@@ -132,3 +130,11 @@ For local development, see scripts in `package.json`.
 MIT &copy; Marc H. Weiner
 
 [See full license](LICENSE)
+
+# Sponsored by
+
+[![Sponsored by Aeroview](sponsored-by-aeroview.svg)](https://aeroview.io)
+
+We believe that observability tools should be easy-to-use and developer-friendly and built with serverless in mind. See your logs in real time, automatically create incidents, and schedule on-call rotations. 
+
+We are currently in private beta, and we are looking for beta testers. If you are interested, please apply at [aeroview.io](https://aeroview.io).
