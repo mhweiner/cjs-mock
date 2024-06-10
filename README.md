@@ -5,11 +5,10 @@
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![SemVer](https://img.shields.io/badge/SemVer-2.0.0-blue)]()
 
-'Immutable' NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes. Similar to [proxyquire](https://www.npmjs.com/package/proxyquire), but much simpler and more defensive. Sponsord by [Aeroview](https://aeroview.io).
+'Immutable' NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes. Similar to [proxyquire](https://www.npmjs.com/package/proxyquire), but simpler and safer. Sponsord by [Aeroview](https://aeroview.io).
 
 **Easy to Use 😃**
-- Much simpler than [proxyquire](https://www.npmjs.com/package/proxyquire). 
-- Straightforward documentation.
+- Super simple & straightforward documentation.
 - Debugging utility.
 - Built in Typescript support.
 
@@ -100,8 +99,8 @@ const m = mock('./foo', {
 Just like for `proxyquire` and other mocking utilities, use of this utility is not recommended in production environments, for the following reasons:
 
 1. Mocking utilities (including this one) are typically designed for unit testing in a sandbox environment, not production code.
-2. It's easy to get the mock wrong (which is why we throw errors for unused mocks and offer debug utilities). Although frustrating, this is harmless in a test environment, but can be disastrous in production.
-3. It has side effects on the module cache. This can lead to some very unexpected behavior outside of a unit test.
+2. It's easy to get the mock wrong (which is why we throw errors for unused mocks and offer debug utilities).
+3. It has side effects on the module cache, by clearing it. This can lead to some very unexpected behavior outside of a unit test.
 
 # Debugging
 
@@ -129,9 +128,9 @@ MIT &copy; Marc H. Weiner
 
 [See full license](LICENSE)
 
-# Sponsored by
+# Sponsors
 
-[![Sponsored by Aeroview](docs/aeroview-logo.svg)](https://aeroview.io)
+[![Aeroview](docs/aeroview-logo.svg)](https://aeroview.io)
 
 We believe that observability tools should be easy-to-use, developer-friendly, and built with serverless in mind. See your logs in real time, automatically create incidents, and schedule on-call rotations quickly and easily.
 
