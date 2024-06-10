@@ -131,8 +131,8 @@ MIT &copy; Marc H. Weiner
 
 # Sponsored by
 
-[![Sponsored by Aeroview](docs/sponsored-by-aeroview.svg)](https://aeroview.io)
+[![Sponsored by Aeroview](docs/aeroview-logo.svg)](https://aeroview.io)
 
-We believe that observability tools should be easy-to-use, developer-friendly, and built with serverless in mind. See your logs in real time, automatically create incidents, and schedule on-call rotations.
+We believe that observability tools should be easy-to-use, developer-friendly, and built with serverless in mind. See your logs in real time, automatically create incidents, and schedule on-call rotations quickly and easily.
 
-We are currently in private beta, and we are looking for beta testers. If you are interested, please apply at [aeroview.io](https://aeroview.io).
+We are currently in private beta. If you are interested in becoming a beta tester, please apply at [aeroview.io](https://aeroview.io).
