@@ -5,7 +5,7 @@
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![SemVer](https://img.shields.io/badge/SemVer-2.0.0-blue)]()
 
-'Immutable' NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes. Similar to [proxyquire](https://www.npmjs.com/package/proxyquire), but simpler and safer. Sponsord by [Aeroview](https://aeroview.io).
+'Immutable' NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes. Similar to [proxyquire](https://www.npmjs.com/package/proxyquire), but simpler and safer. Sponsored by [Aeroview](https://aeroview.io).
 
 **Easy to Use 😃**
 - Super simple & straightforward documentation.
@@ -111,9 +111,15 @@ To enable this mode, set this in your environment: `CJS_MOCK_DEBUG=1`.
 Example (trucated) output:
 
 ```console
+CJS_MOCK_DEBUG:  registerMocks(): ./transports [/Users/marc/code/jsout/src/transports.ts]
+CJS_MOCK_DEBUG:  require(): /Users/marc/code/jsout/src/output.ts [/Users/marc/code/jsout/src/output.ts]
+CJS_MOCK_DEBUG:  resolve(): module: ./log, dir: /Users/marc/code/jsout/src
+CJS_MOCK_DEBUG:  mock(): ./log [/Users/marc/code/jsout/src/log.ts]
+CJS_MOCK_DEBUG:  mock(): caller: /Users/marc/code/jsout/src/log.spec.ts
+CJS_MOCK_DEBUG:  resolve(): module: ./output, dir: /Users/marc/code/jsout/src
 ```
 
-Be warned, this will produce a ton of output to `stdout`. It's sometimes shocking just how many modules are required in a node project, including built-in modules.
+Be warned, this may produce a *metric ton* of output to `stdout`. It's sometimes shocking just how many modules are required in a node project, including built-in modules. You may want to limit the output to just the relevant test by only running that test.
 
 # Contribution
 
