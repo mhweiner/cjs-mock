@@ -136,7 +136,13 @@ MIT &copy; Marc H. Weiner
 
 # Sponsors
 
-[![Aeroview](docs/aeroview-logo.svg)](https://aeroview.io)
+<a href="https://aeroview.io">
+  <picture>
+      <source srcset="docs/aeroview-logo-dark.svg" media="(prefers-color-scheme: dark)">
+      <source srcset="docs/aeroview-logo-light.svg" media="(prefers-color-scheme: light)">
+      <img src="docs/aeroview-logo-light.svg" alt="Logo">
+  </picture>
+</a>
 
 We believe that observability tools should be easy-to-use, developer-friendly, and built with serverless in mind. See your logs in real time, automatically create incidents, and schedule on-call rotations quickly and easily.
 
