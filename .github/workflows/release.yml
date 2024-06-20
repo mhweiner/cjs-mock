@@ -1,0 +1,42 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+      - next
+      - alpha
+      - beta
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    concurrency: 
+      group: deploy-${{github.ref}}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@aeroview'
+          cache: 'npm'
+      - name: Cache project's node_modules
+        uses: actions/cache@v3
+        id: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{runner.os}}-node-${{hashFiles('package-lock.json')}}
+      - name: Install app dependencies cleanly
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Linting
+        run: npm run lint
+      - name: Unit tests
+        run: npm test
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm run semantic-release
