@@ -1,63 +1,32 @@
-/*
- * We're using the default semantic-release configurations (including angular preset) with the
- * following minor changes:
- *  - commit type 'docs' should trigger a patch release, so that the README is updated in npmjs.com
- *  - all other commit types also trigger at least a patch release, so that these changes are
- *    reflected on npmjs.com and we get credit for these maintenance activities
- *  - of course, all commits should show up in the release notes
- * Unfortunately, these very simple changes require quite a bit of work and seems quite brittle.
- * Someday, I may want to write my own very simple version of semantic-release, or a custom plugin.
- */
+const types = {
+    feat: {title: '✨ Features', release: 'minor'},
+    fix: {title: '🐛 Bug Fixes', release: 'patch'},
+    perf: {title: '⚡ Performance Improvements', release: 'patch'},
+    revert: {title: '⏪ Reverts', release: 'patch'},
+    docs: {title: '📚 Documentation', release: 'patch'},
+    style: {title: '💅 Styles', release: 'patch'},
+    refactor: {title: '🛠 Code Refactoring', release: 'patch'},
+    test: {title: '🧪 Tests', release: 'patch'},
+    build: {title: '🏗 Build System', release: 'patch'},
+    ci: {title: '🔧 Continuous Integration', release: 'patch'},
+};
 
-const typeTransforms = [
-    ['feat', 'Features'],
-    ['fix', 'Bug Fixes'],
-    ['perf', 'Performance'],
-    ['revert', 'Reverts'],
-    ['docs', 'Documentation'],
-    ['style', 'Code Style'],
-    ['refactor', 'Code Refactoring'],
-    ['chore', 'Chores'],
-    ['test', 'Tests'],
-    ['build', 'Build'],
-    ['ci', 'Continuous Integration'],
-];
+// eslint-disable-next-line max-lines-per-function, @typescript-eslint/explicit-function-return-type
+const transform = (commit, context) => {
 
-// the following is copied and modified from https://github.com/conventional-changelog/conventional-changelog/blob/master/packages/conventional-changelog-angular/writer-opts.js
-// eslint-disable-next-line max-lines-per-function
-function transform(commit, context) {
-
+    const notes = commit.notes.map((note) => ({
+        ...note,
+        title: 'BREAKING CHANGES',
+    }));
+    const type = types[commit.type] ? types[commit.type].title : commit.type;
+    const scope = commit.scope === '*' ? '' : commit.scope;
+    const shortHash = typeof commit.hash === 'string'
+        ? commit.hash.substring(0, 7)
+        : commit.shortHash;
     const issues = [];
+    let subject = commit.subject;
 
-    commit.notes.forEach((note) => {
-
-        note.title = 'BREAKING CHANGES';
-
-    });
-
-    typeTransforms.forEach((type) => {
-
-        if (commit.type === type[0]) {
-
-            commit.type = type[1];
-
-        }
-
-    });
-
-    if (commit.scope === '*') {
-
-        commit.scope = '';
-
-    }
-
-    if (typeof commit.hash === 'string') {
-
-        commit.shortHash = commit.hash.substring(0, 7);
-
-    }
-
-    if (typeof commit.subject === 'string') {
+    if (typeof subject === 'string') {
 
         let url = context.repository
             ? `${context.host}/${context.owner}/${context.repository}`
@@ -67,7 +36,7 @@ function transform(commit, context) {
 
             url = `${url}/issues/`;
             // Issue URLs.
-            commit.subject = commit.subject.replace(/#([0-9]+)/g, (_, issue) => {
+            subject = subject.replace(/#([0-9]+)/g, (_, issue) => {
 
                 issues.push(issue);
                 return `[#${issue}](${url}${issue})`;
@@ -78,7 +47,7 @@ function transform(commit, context) {
         if (context.host) {
 
             // User URLs.
-            commit.subject = commit.subject.replace(/\B@([a-z0-9](?:-?[a-z0-9/]){0,38})/g, (_, username) => {
+            subject = subject.replace(/\B@([a-z0-9](?:-?[a-z0-9/]){0,38})/g, (_, username) => {
 
                 if (username.includes('/')) {
 
@@ -95,11 +64,18 @@ function transform(commit, context) {
     }
 
     // remove references that already appear in the subject
-    commit.references = commit.references.filter((reference) => issues.indexOf(reference.issue) === -1);
+    const references = commit.references.filter((reference) => !issues.includes(reference.issue));
 
-    return commit;
+    return {
+        notes,
+        type,
+        scope,
+        shortHash,
+        subject,
+        references,
+    };
 
-}
+};
 
 module.exports = {
     branches: [

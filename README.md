@@ -134,16 +134,12 @@ MIT &copy; Marc H. Weiner
 
 [See full license](LICENSE)
 
-# Sponsors
+## Get better observability with Aeroview
 
-<a href="https://aeroview.io">
-  <picture>
-      <source srcset="docs/aeroview-logo-dark.svg" media="(prefers-color-scheme: dark)">
-      <source srcset="docs/aeroview-logo-light.svg" media="(prefers-color-scheme: light)">
-      <img src="docs/aeroview-logo-light.svg" alt="Logo">
-  </picture>
-</a>
+<picture>
+    <source srcset="docs/aeroview-logo-lockup.svg" media="(prefers-color-scheme: dark)">
+    <source srcset="docs/aeroview-logo-lockup-dark.svg" media="(prefers-color-scheme: light)">
+    <img src="docs/aeroview-logo-lockup-dark.svg" alt="Logo" style="max-width: 150px;margin: 0 0 10px">
+</picture>
 
-We believe that observability tools should be easy-to-use, developer-friendly, and built with serverless in mind. See your logs in real time, automatically create incidents, and schedule on-call rotations quickly and easily.
-
-We are currently in private beta. If you are interested in becoming a beta tester, please apply at [aeroview.io](https://aeroview.io).
+Aeroview is a developer-friendly, AI-powered observability platform that helps you monitor, troubleshoot, and optimize your applications. Get started for free at [https://aeroview.io](https://aeroview.io).
