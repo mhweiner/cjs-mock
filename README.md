@@ -19,7 +19,7 @@
 **Robust & Reliable 💪**
 - Tiny codebase written in Typescript with only 1 dependency (which is also tiny and itself has no dependencies).
 
-# Example
+## Example
 
 _isValidWord.ts_
 ```typescript
@@ -54,15 +54,15 @@ test('valid word returns true', async (assert) => {
 
 See more examples in the [docs/examples.md](examples.md)
 
-# Installation
+## Installation
 
  ```console
  npm i cjs-mock -D
  ```
 
-# API
+## API
 
-## `mock(modulePath: string, mocks: any): module`
+### `mock(modulePath: string, mocks: any): module`
 
 Returns a module with Dependency Injection for `modulePath`, as specified by the `mocks` argument. As a side effect, the module cache is deleted for module specified by `modulePath` and all modules specified in `mocks`. This cache is deleted at the start and end of the function. This should not matter during unit testing, but it is something to be aware of. **This should not be used in production code.**
 
@@ -82,7 +82,7 @@ Error: The following imports were unused in ./foo:
 
 This is a defensive measure to ensure that the mocks are being used as intended.
 
-# Partial Mocking
+## Partial Mocking
 
 You can nest `mock()` for partial mocking of nested dependencies:
 
@@ -94,7 +94,7 @@ const m = mock('./foo', {
 });
 ```
 
-# Do Not Use in Production Environment
+## Do Not Use in Production Environment
 
 Just like for `proxyquire` and other mocking utilities, use of this utility is not recommended in production environments, for the following reasons:
 
@@ -102,7 +102,7 @@ Just like for `proxyquire` and other mocking utilities, use of this utility is n
 2. It's easy to get the mock wrong (which is why we throw errors for unused mocks and offer debug utilities).
 3. It has side effects on the module cache, by clearing it. This can lead to some very unexpected behavior outside of a unit test.
 
-# Debugging
+## Debugging
 
 A debugging utility is included, for use when you are having a difficult time seeing the order of how things are getting imported, and if a mock has been substituted after a successful resolution & match.
 
@@ -121,14 +121,14 @@ CJS_MOCK_DEBUG:  resolve(): module: ./output, dir: /Users/marc/code/jsout/src
 
 Be warned, this may produce a *metric ton* of output to `stdout`. It's sometimes shocking just how many modules are required in a node project, including built-in modules. You may want to limit the output to just the relevant test by only running that test.
 
-# Contribution
+## Contribution
 
 For local development, see scripts in `package.json`.
 
 - Issue a PR against `main` and request review. Make sure all tests pass and coverage is good.
 - You can also submit an issue.
 
-# License
+## License
 
 MIT &copy; Marc H. Weiner
 
