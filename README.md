@@ -140,7 +140,7 @@ MIT &copy; Marc H. Weiner
 
 [See full license](LICENSE)
 
-## Get better observability with Aeroview
+## Sponsors
 
 <picture>
     <source srcset="docs/aeroview-logo-lockup.svg" media="(prefers-color-scheme: dark)">
