@@ -1,11 +1,11 @@
 <svg width="176" height="59" viewBox="0 0 176 59" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="59" height="59" fill="black"/>
-<rect x="3" y="3" width="25" height="25" fill="#616161"/>
-<rect x="31" y="3" width="25" height="25" fill="#616161"/>
-<rect x="3" y="31" width="25" height="25" fill="#616161"/>
+<rect x="3" y="3" width="25" height="25" fill="#979797"/>
+<rect x="31" y="3" width="25" height="25" fill="#979797"/>
+<rect x="3" y="31" width="25" height="25" fill="#979797"/>
 <rect width="59" height="59" transform="translate(117)" fill="black"/>
-<rect x="120" y="3" width="25" height="25" fill="#616161"/>
+<rect x="120" y="3" width="25" height="25" fill="#979797"/>
 <rect x="148" y="3" width="25" height="25" fill="#8019D1"/>
-<rect x="120" y="31" width="25" height="25" fill="#616161"/>
+<rect x="120" y="31" width="25" height="25" fill="#979797"/>
 <path d="M103.707 28.7071C104.098 28.3166 104.098 27.6834 103.707 27.2929L97.3431 20.9289C96.9526 20.5384 96.3195 20.5384 95.9289 20.9289C95.5384 21.3195 95.5384 21.9526 95.9289 22.3431L101.586 28L95.9289 33.6569C95.5384 34.0474 95.5384 34.6805 95.9289 35.0711C96.3195 35.4616 96.9526 35.4616 97.3431 35.0711L103.707 28.7071ZM69 29H103V27H69V29Z" fill="black"/>
 </svg>
