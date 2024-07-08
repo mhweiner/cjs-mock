@@ -1,7 +1,7 @@
 {
   "name": "cjs-mock",
-  "version": "0.1.0",
-  "description": "'Immutable' NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes.",
+  "version": "0.0.0-autorel",
+  "description": "NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes.",
   "main": "./dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -12,10 +12,9 @@
     "url": "https://github.com/mhweiner/cjs-mock.git"
   },
   "scripts": {
-    "lint": "eslint ./ --ext .js,.ts",
-    "build": "rm -rf ./dist && tsc",
     "prepare": "npm run build",
-    "semantic-release": "semantic-release"
+    "lint": "eslint ./ --ext .js,.ts",
+    "build": "rm -rf ./dist && tsc"
   },
   "homepage": "https://github.com/mhweiner/cjs-mock",
   "keywords": [
