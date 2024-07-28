@@ -20,13 +20,15 @@ Module.prototype.require = new Proxy(Module.prototype.require, {
         const absolutePath = Module._resolveFilename(name, thisArg);
         const mock = registeredMocks.get(absolutePath);
 
-        debug(`require(): ${name} [${absolutePath}]`);
-
         if (mock) {
 
-            debug(`require(): replacing ${name} [${absolutePath}] with mock`);
+            debug(`require(): REPLACING ${name} [${absolutePath}] WITH MOCK`);
             registeredMocks.delete(absolutePath);
             return mock.mockReturnValue;
+
+        } else {
+
+            debug(`require(): ${name} [${absolutePath}]`);
 
         }
 
@@ -36,8 +38,6 @@ Module.prototype.require = new Proxy(Module.prototype.require, {
 });
 
 function resolve(modulePath: string, dir: string, parentModule: any): string {
-
-    debug(`resolve(): module: ${modulePath}, dir: ${dir}`);
 
     // if path starts with ., then it's relative
     if (modulePath.slice(0, 1) === '.') {
@@ -86,8 +86,7 @@ export function mock(modulePath: string, mocks: any) {
     const absolutePath = resolve(modulePath, dir, parentModule);
     const moduleDir = path.dirname(absolutePath);
 
-    debug(`mock(): ${modulePath} [${absolutePath}]`);
-    debug(`mock(): caller: ${callerFile}`);
+    debug(`mock(): ${modulePath} [${absolutePath}]\n  at ${callerFile}`);
 
     if (!absolutePath) {
 
