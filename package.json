@@ -14,7 +14,8 @@
   "scripts": {
     "prepare": "npm run build",
     "lint": "eslint ./ --ext .js,.ts",
-    "build": "rm -rf ./dist && tsc"
+    "build": "rm -rf ./dist && tsc",
+    "test": "hoare 'src/**/*.spec.ts'"
   },
   "homepage": "https://github.com/mhweiner/cjs-mock",
   "keywords": [
@@ -41,6 +42,7 @@
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "@typescript-eslint/parser": "^5.2.0",
     "eslint": "^8.1.0",
+    "hoare": "3.1.9",
     "ts-node": "^10.4.0",
     "typescript": "^4.4.4"
   }

@@ -8,8 +8,8 @@
 
 [![build status](https://github.com/mhweiner/cjs-mock/actions/workflows/release.yml/badge.svg)](https://github.com/mhweiner/cjs-mock/actions)
 [![SemVer](https://img.shields.io/badge/SemVer-2.0.0-blue)]()
-[![Autorel](https://img.shields.io/badge/autorel-666.svg?logo=data:image/svg%2bxml;base64,PHN2ZyB3aWR0aD0iNDIiIGhlaWdodD0iNDMiIHZpZXdCb3g9IjAgMCA0MiA0MyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2LjQwNjIgMC4yNUgyNS41OTM4TDI2Ljk4ODMgNi43MzA0N0MyOC4zMDA4IDcuMjIyNjYgMjkuNDQ5MiA3Ljk2MDk0IDMwLjU5NzcgOC43ODEyNUwzNi44MzIgNi44MTI1TDQxLjQyNTggMTQuNzY5NUwzNi41ODU5IDE5LjE5OTJDMzYuNjY4IDE5Ljg1NTUgMzYuNzUgMjAuNTkzOCAzNi43NSAyMS4yNUMzNi43NSAyMS45ODgzIDM2LjY2OCAyMi42NDQ1IDM2LjU4NTkgMjMuMzgyOEw0MS40MjU4IDI3LjgxMjVMMzYuODMyIDM1Ljc2OTVMMzAuNTk3NyAzMy43MTg4QzI5LjQ0OTIgMzQuNjIxMSAyOC4zMDA4IDM1LjI3NzMgMjYuOTg4MyAzNS44NTE2TDI1LjU5MzggNDIuMjVIMTYuNDA2MkwxNC45Mjk3IDM1Ljg1MTZDMTMuNjk5MiAzNS4zNTk0IDEyLjQ2ODggMzQuNjIxMSAxMS4zMjAzIDMzLjgwMDhMNS4wODU5NCAzNS43Njk1TDAuNDkyMTg4IDI3LjgxMjVMNS4zMzIwMyAyMy4zODI4QzUuMjUgMjIuNzI2NiA1LjI1IDIxLjk4ODMgNS4yNSAyMS4yNUM1LjI1IDIwLjU5MzggNS4yNSAxOS44NTU1IDUuMzMyMDMgMTkuMTk5MkwwLjQ5MjE4OCAxNC43Njk1TDUuMDg1OTQgNi44MTI1TDExLjMyMDMgOC43ODEyNUMxMi40Njg4IDcuOTYwOTQgMTMuNjk5MiA3LjIyMjY2IDE0LjkyOTcgNi43MzA0N0wxNi40MDYyIDAuMjVaTTIxIDI3LjgxMjVDMjMuMjk2OSAyNy44MTI1IDI1LjQyOTcgMjYuNTgyIDI2LjY2MDIgMjQuNTMxMkMyNy44MDg2IDIyLjU2MjUgMjcuODA4NiAyMC4wMTk1IDI2LjY2MDIgMTcuOTY4OEMyNS40Mjk3IDE2IDIzLjI5NjkgMTQuNjg3NSAyMSAxNC42ODc1QzE4LjYyMTEgMTQuNjg3NSAxNi40ODgzIDE2IDE1LjI1NzggMTcuOTY4OEMxNC4xMDk0IDIwLjAxOTUgMTQuMTA5NCAyMi41NjI1IDE1LjI1NzggMjQuNTMxMkMxNi40ODgzIDI2LjU4MiAxOC42MjExIDI3LjgxMjUgMjEgMjcuODEyNVoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=)](https://github.com/mhweiner/autorel)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![autorel](https://raw.githubusercontent.com/mhweiner/autorel/main/badge.svg)](https://github.com/mhweiner/autorel)
 
 NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes. Similar to [proxyquire](https://www.npmjs.com/package/proxyquire), but simpler and safer. Sponsored by [Aeroview](https://aeroview.io).
 
@@ -24,6 +24,12 @@ NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes. Simi
 
 **Robust & Reliable 💪**
 - Tiny codebase written in Typescript with only 1 dependency (which is also tiny and itself has no dependencies).
+
+## Installation
+
+ ```console
+ npm i cjs-mock -D
+ ```
 
 ## Example
 
@@ -45,10 +51,10 @@ _isValidWord.spec.ts_
 ```typescript
 import {test} from 'hoare';
 import {mock} from 'cjs-mock';
-import * as mod from './isValidWord'; // just used for type
+import * as m from './isValidWord'; // just used for type
 
 const dict = ['dog', 'cat', 'fish'].join('\n');
-const mockMod: typeof mod = mock('./isValidWord', {
+const mockMod: typeof m = mock('./isValidWord', {
     'fs/promises': {readFile: () => Promise.resolve(dict)},
 });
 
@@ -58,13 +64,41 @@ test('valid word returns true', async (assert) => {
 });
 ```
 
-See more examples in the [docs/examples.md](examples.md)
+## Example using stubs
 
-## Installation
+`cjs-mock` comes with a very simple stubbing utility, `stub()`, which is useful for when you want to test that a function was called with the correct arguments, but don't care about the return value. It is similar to `sinon.stub()` but much simpler.
 
- ```console
- npm i cjs-mock -D
- ```
+_greet.ts_
+```typescript
+import {getGreeting} from './getGreeting'; // we're going to mock this
+
+export async function greet(name: string): Promise<string> {
+  return getGreeting(name);
+}
+```
+
+
+_greet.spec.ts_
+```typescript
+import {test} from 'hoare';
+import {mock, stub} from 'cjs-mock';
+import * as m from './getGreeting'; // just used for type
+
+test('greet', (assert) => {
+  const getGreetingStub = stub();
+  const mockMod: typeof m = mock('./greet', {
+    './getGreeting': {getGreeting: getGreetingStub.func);
+
+  mockMod.greet('Bob')
+  assert.equal(
+    getGreetingStub.getCalls(),
+    [['Bob']],
+    'getGreeting was called with "Bob"'
+  );
+});
+```
+
+#### See more examples in the [docs/examples.md](examples.md)
 
 ## API
 
