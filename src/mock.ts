@@ -19,19 +19,19 @@ Module.prototype.require = new Proxy(Module.prototype.require, {
         // eslint-disable-next-line no-underscore-dangle
         const absolutePath = Module._resolveFilename(name, thisArg);
         const mock = registeredMocks.get(absolutePath);
-        const stackTrace = callsites().slice(1).map((callsite) => callsite.getFileName())
-            .filter((file) => !file!.includes('node_modules') && !file!.includes('internal'))
-            .join('\n');
+        const stackTraceArr = callsites().map((callsite) => callsite.getFileName())
+            .filter((file) => file && !file.includes('internal'));
+        const stackTrace = stackTraceArr.length ? `\n  at${stackTraceArr.join('\n  at ')}` : '';
 
         if (mock) {
 
-            debug(`require(): REPLACING WITH MOCK ${name} [${absolutePath}]\n  at ${stackTrace}`);
+            debug(`require(): REPLACING WITH MOCK ${name} [${absolutePath}] ${stackTrace}`);
             registeredMocks.delete(absolutePath);
             return mock.mockReturnValue;
 
         } else {
 
-            debug(`require(): ${name} [${absolutePath}]\n  at ${stackTrace}`);
+            debug(`require(): ${name} [${absolutePath}] ${stackTrace}`);
 
         }
 
