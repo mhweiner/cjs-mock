@@ -13,17 +13,17 @@
 
 NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes. Similar to [proxyquire](https://www.npmjs.com/package/proxyquire), but simpler and safer. Sponsored by [Aeroview](https://aeroview.io).
 
-**Easy to Use 😃**
-- Super simple & straightforward documentation.
-- Debugging utility.
-- Built in Typescript support.
+**😃 Easy to Use**
+- Super simple & straightforward documentation
+- Powerful debugging utility
+- Built in Typescript support
 
-**Defensive 🛡**
-- Throws an error if any mocks are unused by module we are mocking.
-- Module Cache for the module in question is always deleted before and after mocking to minimize side effects and make behavior more predictable and approximate immutability.
+**🛡 Defensive & Immutable Mocking**
+- Throws an error if any mocks are unused by module we are mocking
+- Module Cache for mocked modules are always deleted before and after, to minimize side effects and make behavior more predictable and approximate immutability
 
-**Robust & Reliable 💪**
-- Tiny codebase written in Typescript with only 1 dependency (which is also tiny and itself has no dependencies).
+**💪 Robust & Reliable**
+- Tiny codebase written in Typescript with only 1 tiny dependency
 
 ## Example
 
