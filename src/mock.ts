@@ -1,5 +1,6 @@
 import path from 'path';
 import callsites from 'callsites';
+import {bold, green, grey} from './lib/colors';
 // eslint-disable-next-line @typescript-eslint/no-require-imports,@typescript-eslint/no-var-requires
 const Module = require('module');
 const registeredMocks = new Map<string, {modulePath: string, mockReturnValue: any}>();
@@ -19,19 +20,16 @@ Module.prototype.require = new Proxy(Module.prototype.require, {
         // eslint-disable-next-line no-underscore-dangle
         const absolutePath = Module._resolveFilename(name, thisArg);
         const mock = registeredMocks.get(absolutePath);
-        const stackTraceArr = callsites().map((callsite) => callsite.getFileName())
-            .filter((file) => file && !file.includes('internal'));
-        const stackTrace = stackTraceArr.length ? `\n  at${stackTraceArr.join('\n  at ')}` : '';
 
         if (mock) {
 
-            debug(`require(): REPLACING WITH MOCK ${name} [${absolutePath}] ${stackTrace}`);
+            debug(`require(): ${green('REPLACING WITH MOCK')} ${bold(name)} [${absolutePath}] ${getStackTrace()}`);
             registeredMocks.delete(absolutePath);
             return mock.mockReturnValue;
 
         } else {
 
-            debug(`require(): ${name} [${absolutePath}] ${stackTrace}`);
+            debug(`require(): ${bold(name)} [${absolutePath}] ${getStackTrace()}`);
 
         }
 
@@ -89,7 +87,7 @@ export function mock(modulePath: string, mocks: any) {
     const absolutePath = resolve(modulePath, dir, parentModule);
     const moduleDir = path.dirname(absolutePath);
 
-    debug(`mock(): ${modulePath} [${absolutePath}]\n  at ${callerFile}`);
+    debug(`mock(): ${modulePath} [${absolutePath}]`);
 
     if (!absolutePath) {
 
@@ -115,5 +113,26 @@ export function mock(modulePath: string, mocks: any) {
     delete require.cache[absolutePath];
 
     return mod;
+
+}
+
+function getStackTrace() {
+
+    const trace = callsites()
+        .slice(1)
+        .filter((callsite) => {
+
+            const file = callsite.getFileName();
+
+            return file
+            && !file.includes('internal')
+            && !file.includes('node_modules')
+            && !file.includes('cjs-mock');
+
+        })
+        .map((callsite) => grey(`  at ${callsite.getFileName()} ${callsite.getLineNumber()}:${callsite.getColumnNumber()}`))
+        .join('\n');
+
+    return trace ? `\n${trace}` : '';
 
 }

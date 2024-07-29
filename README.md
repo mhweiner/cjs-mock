@@ -120,18 +120,15 @@ A debugging utility is included, for use when you are having a difficult time se
 
 To enable this mode, set this in your environment: `CJS_MOCK_DEBUG=1`.
 
-Example (trucated) output:
+Example output (truncated screenshot):
 
-```console
-CJS_MOCK_DEBUG:  registerMocks(): ./transports [/Users/marc/code/jsout/src/transports.ts]
-CJS_MOCK_DEBUG:  require(): /Users/marc/code/jsout/src/output.ts [/Users/marc/code/jsout/src/output.ts]
-CJS_MOCK_DEBUG:  resolve(): module: ./log, dir: /Users/marc/code/jsout/src
-CJS_MOCK_DEBUG:  mock(): ./log [/Users/marc/code/jsout/src/log.ts]
-CJS_MOCK_DEBUG:  mock(): caller: /Users/marc/code/jsout/src/log.spec.ts
-CJS_MOCK_DEBUG:  resolve(): module: ./output, dir: /Users/marc/code/jsout/src
-```
+<img src="docs/debug-screenshot.png">
 
-Be warned, this may produce a *metric ton* of output to `stdout`. It's sometimes shocking just how many modules are required in a node project, including built-in modules. You may want to limit the output to just the relevant test by only running that test.
+In this screenshot, we can see that 'lambdaconf' is being imported twice, once from `./getSupportedAwsRegions.ts` (in which case they are getting the replacement mock), and `./updateAwsLogsDestinations.ts` (in which case they are not getting the replacement mock). This is because the module cache is cleared after the first import, and the real module is used for the second import. So, we either forgot to mock `lambdaconf` in one of these modules, or one of our imports also imports `lambdaconf` and we need to mock that module as well.
+
+This can be useful for debugging, to see if a mock is being used or not, and to see the order of module resolution.
+
+Be warned, this may produce a *metric ton* of output. It's sometimes shocking just how many modules are required in a node project, including built-in modules. You may want to limit the output to just the relevant test by only running that test.
 
 # Support, Feedback, and Contributions
 
