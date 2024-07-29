@@ -8,8 +8,8 @@
 
 [![build status](https://github.com/mhweiner/cjs-mock/actions/workflows/release.yml/badge.svg)](https://github.com/mhweiner/cjs-mock/actions)
 [![SemVer](https://img.shields.io/badge/SemVer-2.0.0-blue)]()
-[![Autorel](https://img.shields.io/badge/autorel-666.svg?logo=data:image/svg%2bxml;base64,PHN2ZyB3aWR0aD0iNDIiIGhlaWdodD0iNDMiIHZpZXdCb3g9IjAgMCA0MiA0MyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2LjQwNjIgMC4yNUgyNS41OTM4TDI2Ljk4ODMgNi43MzA0N0MyOC4zMDA4IDcuMjIyNjYgMjkuNDQ5MiA3Ljk2MDk0IDMwLjU5NzcgOC43ODEyNUwzNi44MzIgNi44MTI1TDQxLjQyNTggMTQuNzY5NUwzNi41ODU5IDE5LjE5OTJDMzYuNjY4IDE5Ljg1NTUgMzYuNzUgMjAuNTkzOCAzNi43NSAyMS4yNUMzNi43NSAyMS45ODgzIDM2LjY2OCAyMi42NDQ1IDM2LjU4NTkgMjMuMzgyOEw0MS40MjU4IDI3LjgxMjVMMzYuODMyIDM1Ljc2OTVMMzAuNTk3NyAzMy43MTg4QzI5LjQ0OTIgMzQuNjIxMSAyOC4zMDA4IDM1LjI3NzMgMjYuOTg4MyAzNS44NTE2TDI1LjU5MzggNDIuMjVIMTYuNDA2MkwxNC45Mjk3IDM1Ljg1MTZDMTMuNjk5MiAzNS4zNTk0IDEyLjQ2ODggMzQuNjIxMSAxMS4zMjAzIDMzLjgwMDhMNS4wODU5NCAzNS43Njk1TDAuNDkyMTg4IDI3LjgxMjVMNS4zMzIwMyAyMy4zODI4QzUuMjUgMjIuNzI2NiA1LjI1IDIxLjk4ODMgNS4yNSAyMS4yNUM1LjI1IDIwLjU5MzggNS4yNSAxOS44NTU1IDUuMzMyMDMgMTkuMTk5MkwwLjQ5MjE4OCAxNC43Njk1TDUuMDg1OTQgNi44MTI1TDExLjMyMDMgOC43ODEyNUMxMi40Njg4IDcuOTYwOTQgMTMuNjk5MiA3LjIyMjY2IDE0LjkyOTcgNi43MzA0N0wxNi40MDYyIDAuMjVaTTIxIDI3LjgxMjVDMjMuMjk2OSAyNy44MTI1IDI1LjQyOTcgMjYuNTgyIDI2LjY2MDIgMjQuNTMxMkMyNy44MDg2IDIyLjU2MjUgMjcuODA4NiAyMC4wMTk1IDI2LjY2MDIgMTcuOTY4OEMyNS40Mjk3IDE2IDIzLjI5NjkgMTQuNjg3NSAyMSAxNC42ODc1QzE4LjYyMTEgMTQuNjg3NSAxNi40ODgzIDE2IDE1LjI1NzggMTcuOTY4OEMxNC4xMDk0IDIwLjAxOTUgMTQuMTA5NCAyMi41NjI1IDE1LjI1NzggMjQuNTMxMkMxNi40ODgzIDI2LjU4MiAxOC42MjExIDI3LjgxMjUgMjEgMjcuODEyNVoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=)](https://github.com/mhweiner/autorel)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![autorel](https://raw.githubusercontent.com/mhweiner/autorel/main/badge.svg)](https://github.com/mhweiner/autorel)
 
 NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes. Similar to [proxyquire](https://www.npmjs.com/package/proxyquire), but simpler and safer. Sponsored by [Aeroview](https://aeroview.io).
 
@@ -70,7 +70,7 @@ See more examples in the [docs/examples.md](examples.md)
 
 ### `mock(modulePath: string, mocks: any): module`
 
-Returns a module with Dependency Injection for `modulePath`, as specified by the `mocks` argument. As a side effect, the module cache is deleted for module specified by `modulePath` and all modules specified in `mocks`. This cache is deleted at the start and end of the function. This should not matter during unit testing, but it is something to be aware of. **This should not be used in production code.**
+Returns a module with Dependency Injection for `modulePath`, as specified by the `mocks` argument. As a side effect, the module cache is deleted for module specified by `modulePath` and all modules specified in `mocks`. This cache is deleted at the start and end of the function. This should not matter during unit testing, but would likely be a problem in a production environment.
 
 You should pass as a string the same thing you would pass to an `import` statement or `require`, with the following caveats:
 
@@ -87,6 +87,12 @@ Error: The following imports were unused in ./foo:
 ```
 
 This is a defensive measure to ensure that the mocks are being used as intended.
+
+The mocked dependencies will only be resolved *once*, and the real (non-mocked) dependencies will be used for any subsequent imports/requires. This is to prevent the mocks from being used in other modules that import the same module.
+
+However, this can also be a source of confusion.
+
+To aid in debugging, you can set the environment variable `CJS_MOCK_DEBUG=1` to see the order of module resolution and mocking.
 
 ## Partial Mocking
 

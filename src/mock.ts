@@ -25,7 +25,7 @@ Module.prototype.require = new Proxy(Module.prototype.require, {
 
         if (mock) {
 
-            debug(`require(): REPLACING ${name} [${absolutePath}] WITH MOCK\n  at ${stackTrace}`);
+            debug(`require(): REPLACING WITH MOCK ${name} [${absolutePath}]\n  at ${stackTrace}`);
             registeredMocks.delete(absolutePath);
             return mock.mockReturnValue;
 
