@@ -137,13 +137,9 @@ Be warned, this may produce a *metric ton* of output. It's sometimes shocking ju
 - Issue a PR against `main` and request review. Make sure all tests pass and coverage is good.
 - Write about `autorel` in your blog, tweet about it, or share it with your friends!
 
-## License
+# Sponsorship
 
-MIT &copy; Marc H. Weiner
-
-[See full license](LICENSE)
-
-## Sponsors
+Want to sponsor this project? [Reach out to me via email](mailto:mhweiner234@gmail.com?subject=I%20want%20to%20sponsor%20cjs-mock).
 
 <picture>
     <source srcset="docs/aeroview-logo-lockup-dark.svg" media="(prefers-color-scheme: dark)">
@@ -151,4 +147,9 @@ MIT &copy; Marc H. Weiner
     <img src="docs/aeroview-logo-lockup.svg" alt="Logo" style="max-width: 150px;margin: 0 0 10px">
 </picture>
 
-Aeroview is a developer-friendly, AI-powered observability platform that helps you monitor, troubleshoot, and optimize your applications. Get started for free at [https://aeroview.io](https://aeroview.io).
+Aeroview is a lightning-fast, developer-friendly, and AI-powered logging IDE. Get started for free at [https://aeroview.io](https://aeroview.io).
+
+# License
+
+MIT &copy; Marc H. Weiner
+[See full license](LICENSE)
