@@ -79,7 +79,7 @@ function registerMockModules(mockModules: any, dir: string, parentModule: any) {
 
 }
 
-export function mock(modulePath: string, mocks: any) {
+export function mock(modulePath: string, mocks: Record<string, any> = {}) {
 
     const callerFile = callsites()[1].getFileName() as string;
     const parentModule = module.parent?.parent;

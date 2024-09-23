@@ -1,11 +1,7 @@
 name: Release
 on:
   push:
-    branches:
-      - main
-      - next
-      - alpha
-      - beta
+    branches: [main, next]
 jobs:
   release:
     name: Release
@@ -21,13 +17,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: latest
-          registry-url: "https://registry.npmjs.org"
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@aeroview'
           cache: 'npm'
-      - uses: actions/cache@v3
-        id: cache-node-modules
-        with:
-          path: node_modules
-          key: ${{runner.os}}-node-${{hashFiles('package-lock.json')}}
       - run: npm ci
       - run: npm run lint
       - run: npx autorel@^2
