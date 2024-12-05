@@ -141,11 +141,11 @@ Be warned, this may produce a *metric ton* of output. It's sometimes shocking ju
 
 Want to sponsor this project? [Reach out to me via email](mailto:mhweiner234@gmail.com?subject=I%20want%20to%20sponsor%20cjs-mock).
 
-<picture>
+<p style="margin: 30px 0 15px"><picture>
     <source srcset="https://qhg29tyl98-av-www-dev1.s3.us-east-2.amazonaws.com/app-frontend/images/aeroview-white.svg" media="(prefers-color-scheme: dark)">
     <source srcset="https://qhg29tyl98-av-www-dev1.s3.us-east-2.amazonaws.com/app-frontend/images/aeroview-black.svg" media="(prefers-color-scheme: light)">
-    <img src="https://qhg29tyl98-av-www-dev1.s3.us-east-2.amazonaws.com/app-frontend/images/aeroview-black.svg" alt="Logo" style="height: 20px; margin: 20px 0">
-</picture>
+    <img src="https://qhg29tyl98-av-www-dev1.s3.us-east-2.amazonaws.com/app-frontend/images/aeroview-black.svg" alt="Logo" height="20">
+</picture></p>
 
 Aeroview is a lightning-fast, developer-friendly, and AI-powered logging IDE. Get started for free at [https://aeroview.io](https://aeroview.io).
 
