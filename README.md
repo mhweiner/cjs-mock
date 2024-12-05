@@ -152,5 +152,4 @@ Aeroview is a lightning-fast, developer-friendly, and AI-powered logging IDE. Ge
 
 # License
 
-MIT &copy; Marc H. Weiner
-[See full license](LICENSE)
+[MIT](LICENSE)
