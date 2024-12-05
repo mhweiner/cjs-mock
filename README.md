@@ -13,16 +13,16 @@
 
 NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes. Similar to [proxyquire](https://www.npmjs.com/package/proxyquire), but simpler and safer. Sponsored by [Aeroview](https://aeroview.io).
 
-**😃 Easy to Use**
+**😃 Easy to use**
 - Super simple & straightforward documentation
 - Powerful debugging utility
 - Built in Typescript support
 
-**🛡 Defensive & Immutable Mocking**
+**🛡 Defensive & immutable mocking**
 - Throws an error if any mocks are unused by module we are mocking
 - Module Cache for mocked modules are always deleted before and after, to minimize side effects and make behavior more predictable and approximate immutability
 
-**💪 Robust & Reliable**
+**💪 Robust & reliable**
 - Tiny codebase written in Typescript with only 1 tiny dependency
 
 ## Example
@@ -94,7 +94,7 @@ However, this can also be a source of confusion.
 
 To aid in debugging, you can set the environment variable `CJS_MOCK_DEBUG=1` to see the order of module resolution and mocking.
 
-## Partial Mocking
+## Partial mocking
 
 You can nest `mock()` for partial mocking of nested dependencies:
 
@@ -106,7 +106,7 @@ const m = mock('./foo', {
 });
 ```
 
-## Do Not Use in Production Environment
+## DO NOT USE IN PRODUCTION
 
 Just like for `proxyquire` and other mocking utilities, use of this utility is not recommended in production environments, for the following reasons:
 
@@ -130,12 +130,12 @@ This can be useful for debugging, to see if a mock is being used or not, and to 
 
 Be warned, this may produce a *metric ton* of output. It's sometimes shocking just how many modules are required in a node project, including built-in modules. You may want to limit the output to just the relevant test by only running that test.
 
-# Support, Feedback, and Contributions
+# Support, feedback, and contributions
 
 - Star this repo if you like it!
 - Submit an [issue](https://github.com/mhweiner/autorel/issues) with your problem, feature request or bug report
 - Issue a PR against `main` and request review. Make sure all tests pass and coverage is good.
-- Write about `autorel` in your blog, tweet about it, or share it with your friends!
+- Write about this project in your blog, tweet about it, or share it with your friends!
 
 # Sponsorship
 
@@ -149,6 +149,13 @@ Want to sponsor this project? [Reach out to me via email](mailto:mhweiner234@gma
 </picture></p>
 
 Aeroview is a lightning-fast, developer-friendly, and AI-powered logging IDE. Get started for free at [https://aeroview.io](https://aeroview.io).
+
+# Other useful libraries
+
+- [autorel](https://github.com/mhweiner/autorel): Automatic versioning, deployment, and release notes generation
+- [hoare](https://github.com/mhweiner/hoare): A simple, powerful, and flexible testing library for Typescript
+- [jsout](https://github.com/mhweiner/jsout): A simple, powerful, and flexible logging library for Javascript
+- [lambdaconf](https://github.com/mhweiner/lambdaconf): A simple, powerful, and flexible configuration library for Typescript that supports AWS Secrets Manager and dynamic configuration loading
 
 # License
 
