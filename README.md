@@ -139,23 +139,25 @@ Be warned, this may produce a *metric ton* of output. It's sometimes shocking ju
 
 # Sponsorship
 
-Want to sponsor this project? [Reach out to me via email](mailto:mhweiner234@gmail.com?subject=I%20want%20to%20sponsor%20cjs-mock).
+Want to sponsor this project? [Reach out](mailto:mhweiner234@gmail.com?subject=I%20want%20to%20sponsor%20cjs-mock).
 
 <br>
-<p><picture>
+<picture>
     <source srcset="https://qhg29tyl98-av-www-dev1.s3.us-east-2.amazonaws.com/app-frontend/images/aeroview-white.svg" media="(prefers-color-scheme: dark)">
     <source srcset="https://qhg29tyl98-av-www-dev1.s3.us-east-2.amazonaws.com/app-frontend/images/aeroview-black.svg" media="(prefers-color-scheme: light)">
     <img src="https://qhg29tyl98-av-www-dev1.s3.us-east-2.amazonaws.com/app-frontend/images/aeroview-black.svg" alt="Logo" height="20">
-</picture></p>
+</picture>
+<br><br>
 
 Aeroview is a lightning-fast, developer-friendly, and AI-powered logging IDE. Get started for free at [https://aeroview.io](https://aeroview.io).
 
 # Other useful libraries
 
-- [autorel](https://github.com/mhweiner/autorel): Automatic versioning, deployment, and release notes generation
-- [hoare](https://github.com/mhweiner/hoare): A simple, powerful, and flexible testing library for Typescript
-- [jsout](https://github.com/mhweiner/jsout): A simple, powerful, and flexible logging library for Javascript
-- [lambdaconf](https://github.com/mhweiner/lambdaconf): A simple, powerful, and flexible configuration library for Typescript that supports AWS Secrets Manager and dynamic configuration loading
+- [autorel](https://github.com/mhweiner/autorel): Automate semantic releases based on conventional commits. Similar to semantic-release but much simpler.
+- [hoare](https://github.com/mhweiner/hoare): An easy-to-use, fast, and defensive JS/TS test runner designed to help you to write simple, readable, and maintainable tests.
+- [jsout](https://github.com/mhweiner/jsout): A Syslog-compatible, small, and simple logger for Typescript/Javascript projects.
+- [lambdaconf](https://github.com/mhweiner/lambdaconf): A small, yet powerful typed and structured config library with lambda support for things like AWS Secrets Manager. Written in Typescript.
+- [typura](https://github.com/aeroview/typura): Simple and extensible runtime input validation for TS/JS, written in TS, fried in batter.
 
 # License
 
