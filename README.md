@@ -138,13 +138,13 @@ Be warned, this may produce a *metric ton* of output. It's sometimes shocking ju
 - Write about this project in your blog, tweet about it, or share it with your friends!
 
 # Sponsorship
-
+<br>
 <picture>
-    <source srcset="https://qhg29tyl98-av-www-dev1.s3.us-east-2.amazonaws.com/app-frontend/images/aeroview-white.svg" media="(prefers-color-scheme: dark)">
-    <source srcset="https://qhg29tyl98-av-www-dev1.s3.us-east-2.amazonaws.com/app-frontend/images/aeroview-black.svg" media="(prefers-color-scheme: light)">
-    <img src="https://qhg29tyl98-av-www-dev1.s3.us-east-2.amazonaws.com/app-frontend/images/aeroview-black.svg" alt="Logo" height="20">
+    <source srcset="docs/aeroview-white.svg" media="(prefers-color-scheme: dark)">
+    <source srcset="docs/aeroview-black.svg" media="(prefers-color-scheme: light)">
+    <img src="docs/aeroview-black.svg" alt="Logo" height="20">
 </picture>
-<br><br>
+<br>
 
 Aeroview is a lightning-fast, developer-friendly, and AI-powered logging IDE. Get started for free at [https://aeroview.io](https://aeroview.io).
 
@@ -155,8 +155,9 @@ Want to sponsor this project? [Reach out](mailto:mhweiner234@gmail.com?subject=I
 - [autorel](https://github.com/mhweiner/autorel): Automate semantic releases based on conventional commits. Similar to semantic-release but much simpler.
 - [hoare](https://github.com/mhweiner/hoare): An easy-to-use, fast, and defensive JS/TS test runner designed to help you to write simple, readable, and maintainable tests.
 - [jsout](https://github.com/mhweiner/jsout): A Syslog-compatible, small, and simple logger for Typescript/Javascript projects.
-- [lambdaconf](https://github.com/mhweiner/lambdaconf): A small, yet powerful typed and structured config library with lambda support for things like AWS Secrets Manager. Written in Typescript.
+- [brek](https://github.com/mhweiner/brek): A small, yet powerful typed and structured config library with lambda support for things like AWS Secrets Manager.
 - [typura](https://github.com/aeroview/typura): Simple and extensible runtime input validation for TS/JS, written in TS, fried in batter.
+
 
 # License
 
