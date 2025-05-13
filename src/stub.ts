@@ -1,3 +1,5 @@
+import {isDeepStrictEqual} from 'node:util';
+
 /* eslint-disable max-lines-per-function */
 export type Stub = ((...args: any[]) => any) & {
     getCalls: () => any[]
@@ -17,9 +19,7 @@ export function stub(): Stub {
 
         if (expectedArgs !== null) {
 
-            const isMatch =
-        expectedArgs.length === args.length
-        && expectedArgs.every((val, i) => val === args[i]);
+            const isMatch = isDeepStrictEqual(expectedArgs, args);
 
             if (!isMatch) {
 

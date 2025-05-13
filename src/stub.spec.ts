@@ -58,18 +58,19 @@ test('stub throws on unexpected arguments', (assert) => {
 
 });
 
-test('stub does strict equality check for expected args', (assert) => {
+test('stub does recursive, strict, compare-by-value equality check for expected args', (assert) => {
 
     const fn = stub().setExpectedArgs({a: 1});
 
-    // This will fail because objects are compared by reference
-    assert.throws(() => fn({a: 1}), /Stub called with unexpected arguments/);
+    assert.throws(() => fn({a: 1, b: 2}), /Stub called with unexpected arguments/);
+    fn({a: 1}); // Should not throw
 
     const obj = {a: 1};
 
-    fn.clear();
-    fn.setExpectedArgs(obj);
+    fn(obj); // Should not throw
 
-    () => fn(obj); // Should not throw
+    fn.setExpectedArgs(2);
+    assert.throws(() => fn(3), /Stub called with unexpected arguments/);
+    fn(2); // Should not throw
 
 });
