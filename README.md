@@ -97,33 +97,32 @@ To aid in debugging, you can set the environment variable `CJS_MOCK_DEBUG=1` to 
 
 ### `stub(): Stub`
 
-Creates a function stub for use in unit tests, with optional expected argument checking and return value configuration.
+Creates a function stub for use in unit tests, with optional expected argument checking and return value configuration. Could be a good replacement for `sinon.stub()`.
 
 The returned stub function can be called like a normal function and includes additional methods:
 
 - `getCalls(): any[]` — Returns an array of all calls made to the stub (each call is an array of arguments).
-- `clear(): void` — Clears recorded calls and resets internal expectations.
-- `setExpectedArgs(...args: any[]): void` — Defines the exact arguments the stub expects to receive. If the stub is called with different arguments, it throws an error.
-- `setReturnValue(value: any): void` — Sets the value that the stub should return when called.
+- `clear(): Stub` — Clears recorded calls and resets internal expectations.
+- `setExpectedArgs(...args: any[]): Stub` — Defines the exact arguments the stub expects to receive. If the stub is called with different arguments, it throws an error.
+- `setReturnValue(value: any): Stub` — Sets the value that the stub should return when called.
 
 #### Stub Type Definition
 
 ```ts
 export type Stub = ((...args: any[]) => any) & {
   getCalls: () => any[];
-  clear: () => void;
-  setExpectedArgs: (...expected: any[]) => void;
-  setReturnValue: (value: any) => void;
+  clear: () => Stub;
+  setExpectedArgs: (...expected: any[]) => Stub;
+  setReturnValue: (value: any) => Stub;
 };
 ```
 
 #### Example
 
 ```ts
-const myStub = stub();
-
-myStub.setExpectedArgs('hello', 123);
-myStub.setReturnValue('world');
+const myStub = stub()
+  .setExpectedArgs('hello', 123)
+  .setReturnValue('world');
 
 console.log(myStub('hello', 123)); // 'world'
 console.log(myStub.getCalls());    // [['hello', 123]]

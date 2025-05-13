@@ -16,7 +16,7 @@ test('stub records calls', (assert) => {
 
 });
 
-test('stub.clear() empties call history and resets config', (assert) => {
+test('stub.clear() returns the stub and empties call history and resets config', (assert) => {
 
     const fn = stub();
 
@@ -33,13 +33,14 @@ test('stub.clear() empties call history and resets config', (assert) => {
     fn('anything');
     assert.equal(fn.getCalls().length, 1);
 
+    // clear returns the stub
+    assert.equal(fn.clear(), fn);
+
 });
 
-test('stub.setReturnValue returns the value when called', (assert) => {
+test('stub.setReturnValue() returns the stub, and sets the return value of the stub', (assert) => {
 
-    const fn = stub();
-
-    fn.setReturnValue('ok');
+    const fn = stub().setReturnValue('ok');
 
     const result = fn();
 
@@ -49,9 +50,7 @@ test('stub.setReturnValue returns the value when called', (assert) => {
 
 test('stub throws on unexpected arguments', (assert) => {
 
-    const fn = stub();
-
-    fn.setExpectedArgs('expected', 42);
+    const fn = stub().setExpectedArgs('expected', 42);
 
     assert.throws(() => fn('wrong', 42), /Stub called with unexpected arguments/);
     assert.throws(() => fn(), /Stub called with unexpected arguments/);
@@ -61,9 +60,7 @@ test('stub throws on unexpected arguments', (assert) => {
 
 test('stub does strict equality check for expected args', (assert) => {
 
-    const fn = stub();
-
-    fn.setExpectedArgs({a: 1});
+    const fn = stub().setExpectedArgs({a: 1});
 
     // This will fail because objects are compared by reference
     assert.throws(() => fn({a: 1}), /Stub called with unexpected arguments/);

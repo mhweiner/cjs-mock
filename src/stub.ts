@@ -1,8 +1,9 @@
+/* eslint-disable max-lines-per-function */
 export type Stub = ((...args: any[]) => any) & {
     getCalls: () => any[]
-    clear: () => void
-    setExpectedArgs: (...expected: any[]) => void
-    setReturnValue: (value: any) => void
+    clear: () => Stub
+    setExpectedArgs: (...expected: any[]) => Stub
+    setReturnValue: (value: any) => Stub
 };
 
 export function stub(): Stub {
@@ -10,7 +11,6 @@ export function stub(): Stub {
     let expectedArgs: any[] | null = null;
     let returnValue: any = undefined;
     const calls: any[] = [];
-
     const fn = (...args: any[]): any => {
 
         calls.push(args);
@@ -34,24 +34,24 @@ export function stub(): Stub {
     };
 
     fn.getCalls = (): any[] => calls;
-
-    fn.clear = (): void => {
+    fn.clear = (): Stub => {
 
         calls.length = 0;
         expectedArgs = null;
         returnValue = undefined;
+        return fn;
 
     };
-
-    fn.setExpectedArgs = (...args: any[]): void => {
+    fn.setExpectedArgs = (...args: any[]): Stub => {
 
         expectedArgs = args;
+        return fn;
 
     };
-
-    fn.setReturnValue = (value: any): void => {
+    fn.setReturnValue = (value: any): Stub => {
 
         returnValue = value;
+        return fn;
 
     };
 
