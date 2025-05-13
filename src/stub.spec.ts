@@ -74,3 +74,12 @@ test('stub does recursive, strict, compare-by-value equality check for expected 
     fn(2); // Should not throw
 
 });
+
+test('unexpected arg error contains name if supplied in constructor', (assert) => {
+
+    const fn = stub('my-awesome-stub').setExpectedArgs('expected', 42);
+
+    assert.throws(() => fn('wrong', 42), /Stub "my-awesome-stub" called with unexpected arguments/);
+    assert.throws(() => fn(), /Stub "my-awesome-stub" called with unexpected arguments/);
+
+});

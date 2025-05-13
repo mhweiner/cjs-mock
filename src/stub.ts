@@ -8,7 +8,7 @@ export type Stub = ((...args: any[]) => any) & {
     setReturnValue: (value: any) => Stub
 };
 
-export function stub(): Stub {
+export function stub(name?: string): Stub {
 
     let expectedArgs: any[] | null = null;
     let returnValue: any = undefined;
@@ -23,7 +23,7 @@ export function stub(): Stub {
 
             if (!isMatch) {
 
-                throw new Error(`Stub called with unexpected arguments.\nExpected: ${JSON.stringify(expectedArgs)}\nReceived: ${JSON.stringify(args)}`);
+                throw new Error(`Stub ${name ? `"${name}" ` : ''}called with unexpected arguments.\nExpected: ${JSON.stringify(expectedArgs)}\nReceived: ${JSON.stringify(args)}`);
 
             }
 

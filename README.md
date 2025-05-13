@@ -95,7 +95,7 @@ However, this can also be a source of confusion.
 
 To aid in debugging, you can set the environment variable `CJS_MOCK_DEBUG=1` to see the order of module resolution and mocking.
 
-### `stub(): Stub`
+### `stub(name?: string): Stub`
 
 Creates a function stub for use in unit tests, with optional expected argument checking and return value configuration. Could be a good replacement for `sinon.stub()`.
 
@@ -127,7 +127,26 @@ const myStub = stub()
 console.log(myStub('hello', 123)); // 'world'
 console.log(myStub.getCalls());    // [['hello', 123]]
 
-myStub('oops'); // Throws: Stub called with unexpected arguments
+myStub('oops'); // Throws: Stub called with unexpected arguments.
+                // Expected: ['hello', 123]
+                // Received: ['oops']
+```
+
+#### Named stub
+
+You can give your stub name for easier debugging and error messages:
+
+```ts
+const myStub = stub("my-stub")
+  .setExpectedArgs('hello', 123)
+  .setReturnValue('world');
+
+console.log(myStub('hello', 123)); // 'world'
+console.log(myStub.getCalls());    // [['hello', 123]]
+
+myStub('oops'); // Throws: Stub "my-stub" called with unexpected arguments.
+                // Expected: ['hello', 123]
+                // Received: ['oops']
 ```
 
 ## Partial mocking
