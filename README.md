@@ -9,7 +9,7 @@
 [![build status](https://github.com/mhweiner/cjs-mock/actions/workflows/release.yml/badge.svg)](https://github.com/mhweiner/cjs-mock/actions)
 [![SemVer](https://img.shields.io/badge/SemVer-2.0.0-blue)]()
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Static Badge](https://img.shields.io/badge/v2-autorel?label=autorel&labelColor=0ab5fc&color=grey&link=https%3A%2F%2Fgithub.com%2Fmhweiner%2Fautorel)](https://github.com/mhweiner/autorel)
+[![AutoRel](https://img.shields.io/badge/autorel?label=autorel&labelColor=0ab5fc&color=grey&link=https%3A%2F%2Fgithub.com%2Fmhweiner%2Fautorel)](https://github.com/mhweiner/autorel)
 
 NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes. Similar to [proxyquire](https://www.npmjs.com/package/proxyquire), but simpler and safer. Sponsored by [Aeroview](https://aeroview.io).
 
@@ -17,6 +17,7 @@ NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes. Simi
 - Super simple & straightforward documentation
 - Powerful debugging utility
 - Built in Typescript support
+- Supports partial mocking of nested dependencies
 
 **🛡 Defensive & immutable mocking**
 - Throws an error if any mocks are unused by module we are mocking
@@ -93,6 +94,42 @@ The mocked dependencies will only be resolved *once*, and the real (non-mocked) 
 However, this can also be a source of confusion.
 
 To aid in debugging, you can set the environment variable `CJS_MOCK_DEBUG=1` to see the order of module resolution and mocking.
+
+### `stub(): Stub`
+
+Creates a function stub for use in unit tests, with optional expected argument checking and return value configuration.
+
+The returned stub function can be called like a normal function and includes additional methods:
+
+- `getCalls(): any[]` — Returns an array of all calls made to the stub (each call is an array of arguments).
+- `clear(): void` — Clears recorded calls and resets internal expectations.
+- `setExpectedArgs(...args: any[]): void` — Defines the exact arguments the stub expects to receive. If the stub is called with different arguments, it throws an error.
+- `setReturnValue(value: any): void` — Sets the value that the stub should return when called.
+
+#### Stub Type Definition
+
+```ts
+export type Stub = ((...args: any[]) => any) & {
+  getCalls: () => any[];
+  clear: () => void;
+  setExpectedArgs: (...expected: any[]) => void;
+  setReturnValue: (value: any) => void;
+};
+```
+
+#### Example
+
+```ts
+const myStub = stub();
+
+myStub.setExpectedArgs('hello', 123);
+myStub.setReturnValue('world');
+
+console.log(myStub('hello', 123)); // 'world'
+console.log(myStub.getCalls());    // [['hello', 123]]
+
+myStub('oops'); // Throws: Stub called with unexpected arguments
+```
 
 ## Partial mocking
 
