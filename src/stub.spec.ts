@@ -83,3 +83,11 @@ test('unexpected arg error contains name if supplied in constructor', (assert) =
     assert.throws(() => fn(), /Stub "my-awesome-stub" called with unexpected arguments/);
 
 });
+
+test('stub throws error if .throws is set', (assert) => {
+
+    const fn = stub('my-awesome-stub').throws(new Error('boom'));
+
+    assert.throws(() => fn(), /boom/);
+
+});

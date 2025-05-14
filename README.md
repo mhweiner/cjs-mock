@@ -105,6 +105,7 @@ The returned stub function can be called like a normal function and includes add
 - `clear(): Stub` — Clears recorded calls and resets internal expectations.
 - `setExpectedArgs(...args: any[]): Stub` — Defines the exact arguments the stub expects to receive. If the stub is called with different arguments, it throws an error.
 - `setReturnValue(value: any): Stub` — Sets the value that the stub should return when called.
+- `throws(error: Error): Stub` — Configures the stub to throw the specified error when called.
 
 #### Stub Type Definition
 
@@ -114,6 +115,7 @@ export type Stub = ((...args: any[]) => any) & {
   clear: () => Stub;
   setExpectedArgs: (...expected: any[]) => Stub;
   setReturnValue: (value: any) => Stub;
+  throws: (error: Error) => Stub;
 };
 ```
 

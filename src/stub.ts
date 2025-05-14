@@ -12,6 +12,7 @@ export type Stub = ((...args: any[]) => any) & {
     clear: () => Stub
     setExpectedArgs: (...expected: any[]) => Stub
     setReturnValue: (value: any) => Stub
+    throws: (error: Error) => Stub
 };
 
 export function stub(name?: string): Stub {
@@ -22,6 +23,12 @@ export function stub(name?: string): Stub {
     const fn = (...args: any[]): any => {
 
         calls.push(args);
+
+        if (returnValue instanceof Function) {
+
+            return returnValue(...args);
+
+        }
 
         if (expectedArgs !== null) {
 
@@ -57,6 +64,16 @@ export function stub(name?: string): Stub {
     fn.setReturnValue = (value: any): Stub => {
 
         returnValue = value;
+        return fn;
+
+    };
+    fn.throws = (error: Error): Stub => {
+
+        returnValue = () => {
+
+            throw error;
+
+        };
         return fn;
 
     };
