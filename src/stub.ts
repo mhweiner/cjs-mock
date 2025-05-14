@@ -1,4 +1,10 @@
-import {isDeepStrictEqual} from 'node:util';
+import {isDeepStrictEqual, inspect} from 'node:util';
+
+function format(value: any): string {
+
+    return inspect(value, {depth: null, colors: true});
+
+}
 
 /* eslint-disable max-lines-per-function */
 export type Stub = ((...args: any[]) => any) & {
@@ -23,7 +29,7 @@ export function stub(name?: string): Stub {
 
             if (!isMatch) {
 
-                throw new Error(`Stub ${name ? `"${name}" ` : ''}called with unexpected arguments.\nExpected: ${JSON.stringify(expectedArgs)}\nReceived: ${JSON.stringify(args)}`);
+                throw new Error(`Stub ${name ? `"${name}" ` : ''}called with unexpected arguments.\nExpected: ${format(expectedArgs)}\nReceived: ${format(args)}`);
 
             }
 
