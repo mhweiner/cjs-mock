@@ -9,12 +9,12 @@
 [![build status](https://github.com/mhweiner/cjs-mock/actions/workflows/release.yml/badge.svg)](https://github.com/mhweiner/cjs-mock/actions)
 [![SemVer](https://img.shields.io/badge/SemVer-2.0.0-blue)]()
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![autorel](https://img.shields.io/badge/autorel-blue)](https://github.com/mhweiner/autorel)
+[![AutoRel](https://img.shields.io/badge/AutoRel-1bd499)](https://github.com/mhweiner/autorel)
 
 NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes. Similar to [proxyquire](https://www.npmjs.com/package/proxyquire), but simpler and safer. Sponsored by [Aeroview](https://aeroview.io).
 
 **😃 Easy to use**
-- Super simple & straightforward documentation
+- Simple design with predictable behavior, easy to understand
 - Powerful debugging utility
 - Built in Typescript support
 - Supports partial mocking of nested dependencies
@@ -22,9 +22,7 @@ NodeJS module mocking for CJS (CommonJS) modules for unit testing purposes. Simi
 **🛡 Defensive & immutable mocking**
 - Throws an error if any mocks are unused by module we are mocking
 - Module Cache for mocked modules are always deleted before and after, to minimize side effects and make behavior more predictable and approximate immutability
-
-**💪 Robust & reliable**
-- Tiny codebase written in Typescript with only 1 tiny dependency
+- Only replaces dependencies that are direct dependencies of the module we are mocking for more predictable behavior
 
 ## Example
 
