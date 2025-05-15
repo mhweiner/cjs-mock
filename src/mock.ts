@@ -1,9 +1,18 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-require-imports */
 import path from 'path';
 import callsites from 'callsites';
-import {bold, green, grey} from './lib/colors';
-// eslint-disable-next-line @typescript-eslint/no-require-imports,@typescript-eslint/no-var-requires
+import {bold, green, gray} from 'colorette';
 const Module = require('module');
-const registeredMocks = new Map<string, {modulePath: string, mockReturnValue: any}>();
+
+type MockedDeps = {
+    dependencyPath: string // the dependency being mocked
+    mockReturnValue: any // what to return for that dependency
+    parentPath: string // the module whose requires we're intercepting
+};
+
+const depsToMock = new Map<string, MockedDeps>();
 
 function debug(msg: any) {
 
@@ -19,93 +28,96 @@ Module.prototype.require = new Proxy(Module.prototype.require, {
         const [name] = argumentsList;
         // eslint-disable-next-line no-underscore-dangle
         const absolutePath = Module._resolveFilename(name, thisArg);
-        const mock = registeredMocks.get(absolutePath);
+        const mock = depsToMock.get(absolutePath);
 
-        if (mock) {
+        // Only replace if the module is a direct dependency of the caller
+        if (mock && mock.parentPath === thisArg.filename) {
 
             debug(`require(): ${green('REPLACING WITH MOCK')} ${bold(name)} [${absolutePath}] ${getStackTrace()}`);
-            registeredMocks.delete(absolutePath);
+            depsToMock.delete(absolutePath);
             return mock.mockReturnValue;
-
-        } else {
-
-            debug(`require(): ${bold(name)} [${absolutePath}] ${getStackTrace()}`);
 
         }
 
+        debug(`require(): ${bold(name)} [${absolutePath}] ${getStackTrace()}`);
         return Reflect.apply(target, thisArg, argumentsList);
 
     },
 });
 
-function resolve(modulePath: string, dir: string, parentModule: any): string {
+/**
+ * Resolves a module path to an absolute path
+ * @param modulePath - The module path to resolve
+ * @param dir - The directory to resolve the module path in
+ * @param parentModule - The parent module to resolve the module path in
+ * @returns The absolute path of the module
+ */
+function resolve(
+    modulePath: string,
+    dir: string,
+    parentModule: NodeJS.Module|null|undefined
+): string {
 
     // if path starts with ., then it's relative
     if (modulePath.slice(0, 1) === '.') {
 
         const resolvedAbsPath = path.resolve(dir, modulePath);
 
-        // eslint-disable-next-line no-underscore-dangle
         return Module._resolveFilename(resolvedAbsPath, parentModule);
 
     }
 
-    // eslint-disable-next-line no-underscore-dangle
     return Module._resolveFilename(modulePath, parentModule);
 
 }
 
-function registerMockModules(mockModules: any, dir: string, parentModule: any) {
+function registerDepsToReplace(
+    mockModules: any,
+    dir: string,
+    parentModule: NodeJS.Module|null|undefined,
+    targetModulePath: string
+) {
 
     Object.entries(mockModules).forEach((mockModule: any) => {
 
         const [modulePath, mockReturnValue] = mockModule;
         const absolutePath = resolve(modulePath, dir, parentModule);
 
-        debug(`registerMocks(): ${modulePath} [${absolutePath}]`);
+        debug(`will replace: ${modulePath} [${absolutePath}]`);
 
-        if (!absolutePath) {
-
-            throw new Error(`Unable to find module "${modulePath}".`);
-
-        }
-
-        registeredMocks.set(absolutePath, {
-            modulePath,
+        depsToMock.set(absolutePath, {
+            dependencyPath: modulePath,
             mockReturnValue,
+            parentPath: targetModulePath, // This is the module being mocked
         });
 
     });
 
 }
 
-export function mock(modulePath: string, mocks: Record<string, any> = {}) {
+export function mock(modulePath: string, deps: Record<string, any> = {}) {
 
     const callerFile = callsites()[1].getFileName() as string;
-    const parentModule = module.parent?.parent;
+    const callerModule = Object.values(Module._cache).find((mod: any) => mod.filename === callerFile) as NodeJS.Module
+        ?? module.parent?.parent; // this fallback assumes the caller is two levels up (mock.ts -> index.ts -> caller)
     const dir = path.dirname(callerFile);
-    const absolutePath = resolve(modulePath, dir, parentModule);
+    const absolutePath = resolve(modulePath, dir, callerModule);
     const moduleDir = path.dirname(absolutePath);
 
-    debug(`mock(): ${modulePath} [${absolutePath}]`);
+    debug(`mocking: ${modulePath} [${absolutePath}]`);
 
-    if (!absolutePath) {
-
-        throw new Error(`Unable to find ${modulePath}`);
-
-    }
-
-    registerMockModules(mocks, moduleDir, parentModule);
+    // Pass the absolutePath as the targetModulePath
+    registerDepsToReplace(deps, moduleDir, callerModule, absolutePath);
     delete require.cache[absolutePath];
 
-    // eslint-disable-next-line @typescript-eslint/no-require-imports,@typescript-eslint/no-var-requires
+    // require the module that we're mocking
     const mod = require(absolutePath);
 
     // make sure there are no unused mocks
-    if (registeredMocks.size) {
+    if (depsToMock.size) {
 
         throw new Error(`The following imports were not found in ${modulePath}: 
-        ${[...registeredMocks.values()].map((mock) => mock.modulePath).join(', ')}`);
+        ${[...depsToMock.values()].map((mock) => mock.dependencyPath).join(', ')}`);
 
     }
 
@@ -124,13 +136,14 @@ function getStackTrace() {
 
             const file = callsite.getFileName();
 
+            // filter out internal, node_modules, and cjs-mock files
             return file
-            && !file.includes('internal')
-            && !file.includes('node_modules')
-            && !file.includes('cjs-mock');
+                && !file.includes('internal')
+                && !file.includes('node_modules')
+                && !file.includes('cjs-mock');
 
         })
-        .map((callsite) => grey(`  at ${callsite.getFileName()} ${callsite.getLineNumber()}:${callsite.getColumnNumber()}`))
+        .map((callsite) => gray(`  at ${callsite.getFileName()} ${callsite.getLineNumber()}:${callsite.getColumnNumber()}`))
         .join('\n');
 
     return trace ? `\n${trace}` : '';
