@@ -10,8 +10,8 @@ function format(value: any): string {
 export type Stub = ((...args: any[]) => any) & {
     getCalls: () => any[]
     clear: () => Stub
-    setExpectedArgs: (...expected: any[]) => Stub
-    setReturnValue: (value: any) => Stub
+    expects: (...expected: any[]) => Stub
+    returns: (value: any) => Stub
     throws: (error: Error) => Stub
 };
 
@@ -55,13 +55,13 @@ export function stub(name?: string): Stub {
         return fn;
 
     };
-    fn.setExpectedArgs = (...args: any[]): Stub => {
+    fn.expects = (...expected: any[]): Stub => {
 
-        expectedArgs = args;
+        expectedArgs = expected;
         return fn;
 
     };
-    fn.setReturnValue = (value: any): Stub => {
+    fn.returns = (value: any): Stub => {
 
         returnValue = value;
         return fn;

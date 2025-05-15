@@ -103,8 +103,8 @@ The returned stub function can be called like a normal function and includes add
 
 - `getCalls(): any[]` — Returns an array of all calls made to the stub (each call is an array of arguments).
 - `clear(): Stub` — Clears recorded calls and resets internal expectations.
-- `setExpectedArgs(...args: any[]): Stub` — Defines the exact arguments the stub expects to receive. If the stub is called with different arguments, it throws an error.
-- `setReturnValue(value: any): Stub` — Sets the value that the stub should return when called.
+- `expects(...args: any[]): Stub` — Defines the exact arguments the stub expects to receive. If the stub is called with different arguments, it throws an error.
+- `returns(value: any): Stub` — Sets the value that the stub should return when called.
 - `throws(error: Error): Stub` — Configures the stub to throw the specified error when called.
 
 #### Stub Type Definition
@@ -113,8 +113,8 @@ The returned stub function can be called like a normal function and includes add
 export type Stub = ((...args: any[]) => any) & {
   getCalls: () => any[];
   clear: () => Stub;
-  setExpectedArgs: (...expected: any[]) => Stub;
-  setReturnValue: (value: any) => Stub;
+  expects: (...expected: any[]) => Stub;
+  returns: (value: any) => Stub;
   throws: (error: Error) => Stub;
 };
 ```
@@ -123,8 +123,8 @@ export type Stub = ((...args: any[]) => any) & {
 
 ```ts
 const myStub = stub()
-  .setExpectedArgs('hello', 123)
-  .setReturnValue('world');
+  .expects('hello', 123)
+  .returns('world');
 
 console.log(myStub('hello', 123)); // 'world'
 console.log(myStub.getCalls());    // [['hello', 123]]
@@ -140,8 +140,8 @@ You can give your stub name for easier debugging and error messages:
 
 ```ts
 const myStub = stub("my-stub")
-  .setExpectedArgs('hello', 123)
-  .setReturnValue('world');
+  .expects('hello', 123)
+  .returns('world');
 
 console.log(myStub('hello', 123)); // 'world'
 console.log(myStub.getCalls());    // [['hello', 123]]
