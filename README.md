@@ -95,27 +95,7 @@ To aid in debugging, you can set the environment variable `CJS_MOCK_DEBUG=1` to 
 
 ### `stub(name?: string): Stub`
 
-Creates a function stub for use in unit tests, with optional expected argument checking and return value configuration. Could be a good replacement for `sinon.stub()`.
-
-The returned stub function can be called like a normal function and includes additional methods:
-
-- `getCalls(): any[]` — Returns an array of all calls made to the stub (each call is an array of arguments).
-- `clear(): Stub` — Clears recorded calls and resets internal expectations.
-- `expects(...args: any[]): Stub` — Defines the exact arguments the stub expects to receive. If the stub is called with different arguments, it throws an error.
-- `returns(value: any): Stub` — Sets the value that the stub should return when called.
-- `throws(error: Error): Stub` — Configures the stub to throw the specified error when called.
-
-#### Stub Type Definition
-
-```ts
-export type Stub = ((...args: any[]) => any) & {
-  getCalls: () => any[];
-  clear: () => Stub;
-  expects: (...expected: any[]) => Stub;
-  returns: (value: any) => Stub;
-  throws: (error: Error) => Stub;
-};
-```
+Creates a function stub for use in unit tests. Returns a [stubfn](https://github.com/mhweiner/stubfn). This is a great, simpler alternative to `sinon.stub()`.
 
 #### Example
 
@@ -128,23 +108,6 @@ console.log(myStub('hello', 123)); // 'world'
 console.log(myStub.getCalls());    // [['hello', 123]]
 
 myStub('oops'); // Throws: Stub called with unexpected arguments.
-                // Expected: ['hello', 123]
-                // Received: ['oops']
-```
-
-#### Named stub
-
-You can give your stub name for easier debugging and error messages:
-
-```ts
-const myStub = stub("my-stub")
-  .expects('hello', 123)
-  .returns('world');
-
-console.log(myStub('hello', 123)); // 'world'
-console.log(myStub.getCalls());    // [['hello', 123]]
-
-myStub('oops'); // Throws: Stub "my-stub" called with unexpected arguments.
                 // Expected: ['hello', 123]
                 // Received: ['oops']
 ```
@@ -205,14 +168,11 @@ Aeroview is a lightning-fast, developer-friendly, and AI-powered logging IDE. Ge
 
 Want to sponsor this project? [Reach out](mailto:mhweiner234@gmail.com?subject=I%20want%20to%20sponsor%20cjs-mock).
 
-# Other useful libraries
+# Related libraries
 
-- [autorel](https://github.com/mhweiner/autorel): Automate semantic releases based on conventional commits. Similar to semantic-release but much simpler.
+- [stubfn](https://github.com/mhweiner/stubfn): A simple, yet powerful function stubbing utility for unit testing. Already comes with `cjs-mock`!
 - [hoare](https://github.com/mhweiner/hoare): An easy-to-use, fast, and defensive JS/TS test runner designed to help you to write simple, readable, and maintainable tests.
 - [jsout](https://github.com/mhweiner/jsout): A Syslog-compatible, small, and simple logger for Typescript/Javascript projects.
-- [brek](https://github.com/mhweiner/brek): A small, yet powerful typed and structured config library with lambda support for things like AWS Secrets Manager.
-- [typura](https://github.com/aeroview/typura): Simple and extensible runtime input validation for TS/JS, written in TS, fried in batter.
-
 
 # License
 
